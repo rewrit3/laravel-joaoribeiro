@@ -1,2 +1,1 @@
-# Template
-Default repository template.
+# Laravel @ João Ribeiro
