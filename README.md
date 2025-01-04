@@ -1,0 +1,2 @@
+# Template
+Default repository template.
