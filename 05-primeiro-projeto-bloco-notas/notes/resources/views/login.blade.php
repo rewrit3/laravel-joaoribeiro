@@ -10,21 +10,25 @@
 
           <div class="row justify-content-center">
             <div class="col-md-10 col-12">
-              <form action="/login-submit" method="post">
+              <form action="/login-submit" method="post" novalidate>
                 @csrf
-                <div class="mb-2">
-                  <label for="text_username" class="form-label">Username</label>
+                <div class="mt-3 mb-3">
+                  <label for="text_username" class="form-label">Usuário</label>
                   <input type="text" class="form-control bg-dark text-info"
-                    name="text_username" value="{{ old('text_username') }}">
+                    name="text_username" value="{{ old('text_username') }}"
+                    required>
+
                   @error('text_username')
                     <div class="text-danger mt-1 mb-3">{{ $message }}</div>
                   @enderror
                 </div>
 
-                <div class="mb-3">
-                  <label for="text_password" class="form-label">Password</label>
+                <div class="mb-5">
+                  <label for="text_password" class="form-label">Senha</label>
                   <input type="password" class="form-control bg-dark text-info"
-                    name="text_password" value="{{ old('text_password') }}">
+                    name="text_password" value="{{ old('text_password') }}"
+                    required>
+
                   @error('text_password')
                     <div class="text-danger mt-1 mb-3">{{ $message }}</div>
                   @enderror
