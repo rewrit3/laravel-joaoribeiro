@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use App\Models\User;
+use App\Services\Operations;
 
 class MainController extends Controller
 {
@@ -24,26 +25,15 @@ class MainController extends Controller
 
   public function editNote($id)
   {
-    $id = $this->decryptID($id);
+    $id = Operations::decryptID($id);
 
-    echo $id;
+    echo 'id: ' . $id;
   }
 
   public function deleteNote($id)
   {
-    $id = $this->decryptID($id);
+    $id = Operations::decryptID($id);
 
     echo $id;
-  }
-
-  private function decryptID($id)
-  {
-    try {
-      $id = Crypt::decrypt($id);
-    } catch (DecryptException $e) {
-      return redirect()->route('home');
-    }
-
-    return $id;
   }
 }
