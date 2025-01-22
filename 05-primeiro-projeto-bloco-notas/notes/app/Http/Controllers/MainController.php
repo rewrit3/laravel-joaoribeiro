@@ -20,7 +20,12 @@ class MainController extends Controller
 
   public function newNote()
   {
-    echo 'main:newNote';
+    return view('new-note');
+  }
+
+  public function newNoteSubmit(Request $request)
+  {
+    echo 'Creating new note';
   }
 
   public function editNote($id)
@@ -34,6 +39,6 @@ class MainController extends Controller
   {
     $id = Operations::decryptID($id);
 
-    echo $id;
+    echo 'id: ' . $id;
   }
 }
