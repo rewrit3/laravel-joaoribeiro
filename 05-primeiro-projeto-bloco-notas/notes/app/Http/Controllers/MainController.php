@@ -12,7 +12,11 @@ class MainController extends Controller
   public function index()
   {
     $id = session('user.id');
-    $notes = User::find($id)->notes()->get()->toArray();
+    $notes = User::find($id)
+      ->notes()
+      ->whereNull('deleted_at')
+      ->get()
+      ->toArray();
 
     return view('home', ['notes' => $notes]);
   }
@@ -94,6 +98,24 @@ class MainController extends Controller
   {
     $id = Operations::decryptID($id);
 
-    echo 'id: ' . $id;
+    $note = Note::find($id);
+
+    return view('delete-note', ['note' => $note]);
+  }
+
+  public function deleteNoteConfirm($id)
+  {
+    $id = Operations::decryptID($id);
+
+    $note = Note::find($id);
+
+    // hard delete
+    // $note->delete();
+
+    // soft delete
+    $note->deleted_at = date('Y-m-d H:i:s');
+    $note->save();
+
+    return redirect()->route('home');
   }
 }
